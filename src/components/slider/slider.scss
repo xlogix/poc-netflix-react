@@ -1,0 +1,85 @@
+@mixin scrollBar {
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+.new-slider {
+  max-width: 100%;
+  width: 100%;
+  margin: 20px 0px;
+
+  .overlay .title {
+    font-size: 30px;
+    margin-left: 30px;
+    font-weight: 700;
+    transition: opacity 0.25s ease;
+  }
+
+  .slider-wrapper {
+    display: flex;
+    align-items: center;
+    width: auto;
+    overflow-y: auto;
+    height: 200px;
+    overflow-x: hidden;
+    @include scrollBar();
+
+    .btn{
+      width: 40px;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      position: absolute;
+      top: 0;
+      z-index: 1000;
+      &.prev{
+          left: 0px;
+      }
+      &.next{
+          right: 0px;
+      }
+  }
+
+    .new-slider-item {
+      user-select: none;
+      height: 100%;
+      transform: scale(0.8);
+      min-width: 25%;
+      // max-height: 140px;
+      // max-width: 200px;
+      margin-right: 4px;
+      transition: 0.3s;
+      position: relative;
+      overflow: visible;
+      transform-origin: center center;
+
+      &:nth-child(n+6) {
+        margin-top: 20px;
+      }
+      
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        transform: scale(1);
+        z-index: 2;
+      }
+
+      img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

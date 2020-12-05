@@ -30,12 +30,13 @@ p {
   width: 100vw;
   box-sizing: border-box;
   z-index: 5;
+  align-items: center;
 }
 
 .Logo {
   width: 151px;
-  height: 41px;
-  margin-right: 10px;
+  height: 30px;
+  margin-left: 50px;
   transition: margin .125s ease;
 }
 

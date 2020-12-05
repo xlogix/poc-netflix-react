@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production & webpack",
-    "start": "webpack serve",
+    "build": "NODE_ENV=production & webpack --config webpack.prod.js",
+    "start": "webpack serve --config webpack.dev.js",
     "start:dev": "webpack-dev-server"
   },
   "author": "",
@@ -19,7 +19,8 @@
     "lazyloadjs": "^3.2.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-hot-loader": "^4.13.0"
+    "react-hot-loader": "^4.13.0",
+    "webpack": "^5.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -35,8 +36,8 @@
     "optimize-js-plugin": "0.0.4",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.9.0",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.4.0"
   }
 }
