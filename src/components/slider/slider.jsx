@@ -72,20 +72,40 @@ export const NewSlider = (props) => {
     }
   })
 
+  const itemVisible = () => {
+    setInViewport(true)
+  }
+
+  const itemNotVisible = () => {
+    setInViewport(false)
+  }
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  const mouseUp = (e) => {
+    setScroll(e.clientX)
+    setMove(false);
+  }
+
   const mouseDown = (e) => {
     setMove(true);
     setScroll(e.clientX);
   }
+
   const mouseMove = (e) => {
     if (move) {
-      let val = e.clientX - scroll;
-      console.log(val);
+      let val = e.pageX - scroll;
       wrapper.current.scrollTo((val * -1), 0);
     }
+    // const x = e.pageX - wrapper.offsetLeft;
+    // const walk = x - startX;
+    // wrapper.scrollLeft = scrollLeft - walk;
   }
-  const mouseUp = (e) => {
-    setScroll(e.clientX)
-    setMove(false);
+
+  const mouseLeave = (e) => {
+    isDown = false;
   }
 
   return (
@@ -100,15 +120,10 @@ export const NewSlider = (props) => {
       <div
         ref={wrapper}
         className="slider-wrapper"
-        onMouseDown={(e) => mouseDown(e)}
-        onMouseMove={(e) => {
-          if (move) {
-            let val = e.clientX - scroll;
-            console.log(val);
-            wrapper.current.scrollTo((val * -1), 0);
-          }
-        }}
-        onMouseUp={(e) => mouseUp(e)}
+        // onMouseDown={(e) => mouseDown(e)}
+        // onMouseMove={(e) => mouseMove(e)}
+        // onMouseUp={(e) => mouseUp(e)}
+        // onMouseLeave={(e) => mouseLeave(e)}
       >
         {cData.map((res, i) =>
           <NewSliderItem

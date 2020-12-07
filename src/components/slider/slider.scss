@@ -25,29 +25,49 @@
     transition: opacity 0.25s ease;
   }
 
-  .slider-wrapper {
+  .handle {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    width: 4%;
+    text-align: center;
+    justify-content: center;
     display: flex;
+    color:#fff;
+    background: rgba(20, 20, 20, 0.5);
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .handle strong {
+    /* display: none; */
+    height: auto;
+    font-size: 2.5vw;
+  }
+  
+  .handle.handleNext {
+    right: 0;
+  }
+  
+  .handle.handlePrev {
+    left: 0;
+  }
+  
+  .slider:hover .handle {
+    opacity:1;
+  }
+
+  .slider-wrapper {
     align-items: center;
     width: auto;
     overflow-y: auto;
     height: 200px;
     overflow-x: hidden;
     @include scrollBar();
-
-    .btn{
-      width: 40px;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      position: absolute;
-      top: 0;
-      z-index: 1000;
-      &.prev{
-          left: 0px;
-      }
-      &.next{
-          right: 0px;
-      }
-  }
+    display: grid;
+    grid-template-columns: repeat(200px);;
 
     .new-slider-item {
       user-select: none;
@@ -57,15 +77,19 @@
       // max-height: 140px;
       // max-width: 200px;
       margin-right: 4px;
-      transition: 0.3s;
+      display: inline-block;
+      transition: transform 300ms ease 100ms, height 300ms ease 100ms;
       position: relative;
       overflow: visible;
       transform-origin: center center;
+      cursor: pointer;
+      z-index: 1;
+      box-sizing: border-box;
 
-      &:nth-child(n+6) {
+      &:nth-child(n + 6) {
         margin-top: 20px;
       }
-      
+
       &:last-child {
         margin-right: 0;
       }
