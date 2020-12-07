@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 class ListToggle extends Component {
 
@@ -22,8 +24,9 @@ class ListToggle extends Component {
     return (
       <div onClick={this.handleClick} data-toggled={this.state.toggled} className="ListToggle">
         <div>
-          <i className="fa fa-fw fa-plus"></i>
-          <i className="fa fa-fw fa-check"></i>
+          <FontAwesomeIcon icon={faChevronRight} />
+          <i className="fas fa-plus"></i>
+          <i className="fas fa-check"></i>
         </div>
       </div>
     )

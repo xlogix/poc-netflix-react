@@ -5,6 +5,9 @@ import {
   fetchTrendingGifs, fetchRandomGifs, fetchAngryGifs,
   fetchLoveGifs, fetchDrunkGifs
 } from '../../api/fetch.gif';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft, faUndo } from '@fortawesome/free-solid-svg-icons'
+
 
 export const NewSlider = (props) => {
 
@@ -45,19 +48,19 @@ export const NewSlider = (props) => {
     const initFun = async () => {
       let data = {};
       if (props.tag === 'trending') {
-        data = await fetchTrendingGifs();
+        data = await fetchTrendingGifs(10, 0);
       }
       if (props.tag === 'random') {
-        data = await fetchRandomGifs();
+        data = await fetchRandomGifs(10, 0);
       }
       if (props.tag === 'angry') {
-        data = await fetchAngryGifs();
+        data = await fetchAngryGifs(10, 0);
       }
       if (props.tag === 'love') {
-        data = await fetchLoveGifs();
+        data = await fetchLoveGifs(10, 0);
       }
       if (props.tag === 'drunk') {
-        data = await fetchDrunkGifs();
+        data = await fetchDrunkGifs(10, 0);
       }
       let newData = data.data.map((itm) => ({
         placeHolder: itm.images["480w_still"]['url'],
@@ -72,18 +75,7 @@ export const NewSlider = (props) => {
     }
   })
 
-  const itemVisible = () => {
-    setInViewport(true)
-  }
-
-  const itemNotVisible = () => {
-    setInViewport(false)
-  }
-
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
+  /* Mouse Touch Events
   const mouseUp = (e) => {
     setScroll(e.clientX)
     setMove(false);
@@ -99,14 +91,27 @@ export const NewSlider = (props) => {
       let val = e.pageX - scroll;
       wrapper.current.scrollTo((val * -1), 0);
     }
-    // const x = e.pageX - wrapper.offsetLeft;
-    // const walk = x - startX;
-    // wrapper.scrollLeft = scrollLeft - walk;
   }
 
   const mouseLeave = (e) => {
     isDown = false;
-  }
+  } 
+  */
+
+  useEffect(() => {
+    let width = wrapper.current.scrollWidth;
+    console.log('width: ' + width);
+    let divide = width / 200;
+    console.log('divide: ' + divide);
+  });
+
+  const moveToLeft = (e) => {
+    wrapper.current.scrollBy(-50, 0);
+  };
+
+  const moveToRight = (e) => {
+    wrapper.current.scrollBy(50, 0);
+  };
 
   return (
     <div className="new-slider">
@@ -119,12 +124,16 @@ export const NewSlider = (props) => {
       </div>
       <div
         ref={wrapper}
-        className="slider-wrapper"
-        // onMouseDown={(e) => mouseDown(e)}
-        // onMouseMove={(e) => mouseMove(e)}
-        // onMouseUp={(e) => mouseUp(e)}
-        // onMouseLeave={(e) => mouseLeave(e)}
-      >
+        className="slider-wrapper">
+        <div>
+          <button className="icon-btn left" onClick={moveToLeft}>
+            <span><strong><FontAwesomeIcon icon={faChevronLeft} /></strong></span></button>
+        </div>
+        <div>
+          <button className="icon-btn right" onClick={moveToRight}>
+            <span><strong><FontAwesomeIcon icon={faChevronRight} /></strong></span></button>
+        </div>
+
         {cData.map((res, i) =>
           <NewSliderItem
             key={i}

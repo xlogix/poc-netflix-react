@@ -4,21 +4,23 @@ const TRENDING_URL = 'http://api.giphy.com/v1/gifs/';
 const URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const KEY = 'KxVIgO29rrHrqCAkQSzCfCOxyM9eDMOj';
 
-export const fetchRandomGifs = async (name) => {
+export const fetchRandomGifs = async (name, offset) => {
   const { data } = await axios.get(URL + 'random', {
     params: {
       tag: name,
-      api_key: KEY
+      api_key: KEY,
+      offset: offset
     }
   });
 
   return data;
 };
 
-export const fetchTrendingGifs = async () => {
+export const fetchTrendingGifs = async (limit, offset) => {
   const { data } = await axios.get(TRENDING_URL + 'trending', {
     params: {
-      limit: 25,
+      limit: limit,
+      offset: offset,
       api_key: KEY
     }
   });
@@ -26,10 +28,11 @@ export const fetchTrendingGifs = async () => {
   return data
 };
 
-export const fetchAngryGifs = async () => {
+export const fetchAngryGifs = async (limit, offset) => {
   const { data } = await axios.get(URL + 'angry', {
     params: {
-      limit: 25,
+      limit: limit,
+      offset: offset,
       api_key: KEY
     }
   });
@@ -37,10 +40,11 @@ export const fetchAngryGifs = async () => {
   return data
 };
 
-export const fetchLoveGifs = async () => {
+export const fetchLoveGifs = async (limit, offset) => {
   const { data } = await axios.get(URL + 'love', {
     params: {
-      limit: 25,
+      limit: limit,
+      offset: offset,
       api_key: KEY
     }
   });
@@ -48,10 +52,11 @@ export const fetchLoveGifs = async () => {
   return data
 };
 
-export const fetchBoredGifs = async () => {
+export const fetchBoredGifs = async (limit, offset) => {
   const { data } = await axios.get(URL + 'bored', {
     params: {
-      limit: 25,
+      limit: limit,
+      offset: offset,
       api_key: KEY
     }
   });
@@ -59,32 +64,11 @@ export const fetchBoredGifs = async () => {
   return data
 };
 
-export const fetchDrunkGifs = async () => {
+export const fetchDrunkGifs = async (limit, offset) => {
   const { data } = await axios.get(URL + 'drunk', {
     params: {
-      limit: 25,
-      api_key: KEY
-    }
-  });
-
-  return data
-};
-
-export const fetchHappyGifs = async () => {
-  const { data } = await axios.get(URL + 'happy', {
-    params: {
-      limit: 4,
-      api_key: KEY
-    }
-  });
-
-  return data
-};
-
-export const fetchHungryGifs = async () => {
-  const { data } = await axios.get(URL + 'hungry', {
-    params: {
-      limit: 4,
+      limit: limit,
+      offset: offset,
       api_key: KEY
     }
   });

@@ -16,7 +16,7 @@ const App = () => {
     setLoader(true);
 
     try {
-      const { data } = await fetchRandomGifs(searchText);
+      const { data } = await fetchRandomGifs(searchText, 0);
       const getDetails = {
         image: data.fixed_height_downsampled_url,
         title: data.title,
