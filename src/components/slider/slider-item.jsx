@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-global.myLazyload = require('lazyloadjs')();
 import "./slider.scss";
+import React, { useState } from 'react';
+import LazyLoad from 'react-lazyload';
 
 export const NewSliderItem = ({
   imgUrl,
@@ -14,7 +14,9 @@ export const NewSliderItem = ({
         setHover(true)
       }
     } onMouseOut={(e) => setHover(false)}>
-      <img draggable="false" src={hover ? imgUrl : placeholder} onload="myLazyload(this)" alt="loading..." />
+      <LazyLoad>
+        <img draggable="false" src={hover ? imgUrl : placeholder} alt="loading..." />
+      </LazyLoad>
     </div>
   )
 }

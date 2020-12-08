@@ -17,10 +17,11 @@
     "@fortawesome/react-fontawesome": "^0.1.13",
     "@hot-loader/react-dom": "^17.0.1",
     "axios": "^0.21.0",
-    "lazyloadjs": "^3.2.2",
+    "lazyload": "^2.0.0-rc.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
+    "react-lazyload": "^3.1.0",
     "webpack": "^5.10.0"
   },
   "devDependencies": {

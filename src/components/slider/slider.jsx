@@ -5,9 +5,9 @@ import {
   fetchTrendingGifs, fetchRandomGifs, fetchAngryGifs,
   fetchLoveGifs, fetchDrunkGifs
 } from '../../api/fetch.gif';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faChevronLeft, faUndo } from '@fortawesome/free-solid-svg-icons'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import useWindowWidth from './useWindowWidth';
 
 export const NewSlider = (props) => {
 
@@ -43,29 +43,30 @@ export const NewSlider = (props) => {
   let [init, setInit] = useState(true);
   let [scroll, setScroll] = useState(0);
   const wrapper = useRef(null);
+  const windowWidth = useWindowWidth();
 
   useEffect(() => {
     const initFun = async () => {
       let data = {};
       if (props.tag === 'trending') {
-        data = await fetchTrendingGifs(10, 0);
+        data = await fetchTrendingGifs(25, 0);
       }
       if (props.tag === 'random') {
-        data = await fetchRandomGifs(10, 0);
+        data = await fetchRandomGifs(25, 0);
       }
       if (props.tag === 'angry') {
-        data = await fetchAngryGifs(10, 0);
+        data = await fetchAngryGifs(25, 0);
       }
       if (props.tag === 'love') {
-        data = await fetchLoveGifs(10, 0);
+        data = await fetchLoveGifs(25, 0);
       }
       if (props.tag === 'drunk') {
-        data = await fetchDrunkGifs(10, 0);
+        data = await fetchDrunkGifs(25, 0);
       }
       let newData = data.data.map((itm) => ({
         placeHolder: itm.images["480w_still"]['url'],
         url: itm.images["original"]['url'],
-        text: 'GIF here'
+        text: 'GIF'
       }));
       setCData(newData);
     }
@@ -75,42 +76,20 @@ export const NewSlider = (props) => {
     }
   })
 
-  /* Mouse Touch Events
-  const mouseUp = (e) => {
-    setScroll(e.clientX)
-    setMove(false);
-  }
-
-  const mouseDown = (e) => {
-    setMove(true);
-    setScroll(e.clientX);
-  }
-
-  const mouseMove = (e) => {
-    if (move) {
-      let val = e.pageX - scroll;
-      wrapper.current.scrollTo((val * -1), 0);
-    }
-  }
-
-  const mouseLeave = (e) => {
-    isDown = false;
-  } 
-  */
-
-  useEffect(() => {
-    let width = wrapper.current.scrollWidth;
-    console.log('width: ' + width);
-    let divide = width / 200;
-    console.log('divide: ' + divide);
-  });
-
   const moveToLeft = (e) => {
-    wrapper.current.scrollBy(-50, 0);
+    wrapper.current.scrollBy({
+      top: 0,
+      left: -wrapper.current.scrollWidth / 6.2,
+      behavior: 'smooth'
+    });
   };
 
   const moveToRight = (e) => {
-    wrapper.current.scrollBy(50, 0);
+    wrapper.current.scrollBy({
+      top: 0,
+      left: wrapper.current.scrollWidth / 6.2,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -145,6 +124,29 @@ export const NewSlider = (props) => {
       </div>
     </div>
   )
+
+  /* Mouse Touch Events
+  const mouseUp = (e) => {
+    setScroll(e.clientX)
+    setMove(false);
+  }
+
+  const mouseDown = (e) => {
+    setMove(true);
+    setScroll(e.clientX);
+  }
+
+  const mouseMove = (e) => {
+    if (move) {
+      let val = e.pageX - scroll;
+      wrapper.current.scrollTo((val * -1), 0);
+    }
+  }
+
+  const mouseLeave = (e) => {
+    isDown = false;
+  } 
+  */
 }
 
 export default NewSlider;
